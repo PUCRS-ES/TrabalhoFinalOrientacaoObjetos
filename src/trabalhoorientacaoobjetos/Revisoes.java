@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhoorientacaoobjetos;
 
 /**
@@ -18,5 +13,10 @@ public class Revisoes {
     //private User usuario;
     //private Utilidade util;
     
-    
+    public Revisoes(double pontuacao, long time, String sumario, String texto) {
+        this.pontuacao = pontuacao;
+        this.time = time;
+        this.sumario = sumario;
+        this.texto = texto;
+    }
 }
