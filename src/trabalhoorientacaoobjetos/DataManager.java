@@ -10,9 +10,9 @@ import java.util.logging.Logger;
 
 public class DataManager {
 
-    List<Revisoes> reviews = new ArrayList<Revisoes>();
+    List<Revisao> reviews = new ArrayList<Revisao>();
     HashMap<String, Produto> products = new HashMap<String, Produto>();
-    HashMap<String, User> users = new HashMap<String, User>();
+    HashMap<String, Usuario> users = new HashMap<String, Usuario>();
     
     public DataManager() {
         try {
@@ -32,14 +32,14 @@ public class DataManager {
             
             String userId = reviewAtual[3].substring(reviewAtual[3].indexOf(':') + 2);
             String profileName = reviewAtual[4].substring(reviewAtual[4].indexOf(':') + 2);
-            User usuarioAtual = new User(userId, profileName);
+            Usuario usuarioAtual = new Usuario(userId, profileName);
             users.put(userId, usuarioAtual);
             
             double pontuacao = Double.parseDouble(reviewAtual[6].substring(reviewAtual[6].indexOf(':') + 2));
             long time = Long.parseLong(reviewAtual[7].substring(reviewAtual[7].indexOf(':') + 2));
             String sumario = reviewAtual[8].substring(reviewAtual[8].indexOf(':') + 2);
             String texto = reviewAtual[9].substring(reviewAtual[9].indexOf(':') + 2);
-            Revisoes review = new Revisoes(pontuacao, time, sumario, texto);
+            Revisao review = new Revisao(pontuacao, time, sumario, texto, produtoId, userId);
             reviews.add(review);
         }
         catch (FileNotFoundException ex) {

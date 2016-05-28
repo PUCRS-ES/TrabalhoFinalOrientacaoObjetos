@@ -4,19 +4,21 @@ package trabalhoorientacaoobjetos;
  *
  * @author 15202606
  */
-public class Revisoes {
+public class Revisao {
     private double pontuacao;
     private long time;
     private String sumario;
     private String texto;
-    //private Produto produtos;
-    //private User usuario;
+    private String produtoId;
+    private String userId;
     //private Utilidade util;
     
-    public Revisoes(double pontuacao, long time, String sumario, String texto) {
+    public Revisao(double pontuacao, long time, String sumario, String texto, String produtoId, String userId) {
         this.pontuacao = pontuacao;
         this.time = time;
         this.sumario = sumario;
         this.texto = texto;
+        this.produtoId = produtoId;
+        this.userId = userId;
     }
 }
