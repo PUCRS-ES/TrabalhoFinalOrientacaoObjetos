@@ -30,6 +30,8 @@ public class Leitor {
                 linhaAtual = leProximaLinha();
                 review[i] = linhaAtual;
             }
+            //pula a linha em branco entre os reviews
+            leProximaLinha();
             return review;
         }
         
