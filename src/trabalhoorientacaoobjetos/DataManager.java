@@ -24,7 +24,7 @@ public class DataManager {
             String precoAux = reviewAtual[2].substring(reviewAtual[2].indexOf(':') + 2);
             double preco;
             if(precoAux.equals("unknown"))
-                preco = Produto.precoNaoIndentificado;
+                preco = Produto.PRECO_NAO_IDENTIFICADO;
             else
                 preco = Double.parseDouble(precoAux);
             Produto produtoAtual = new Produto(produtoId, titulo, preco);

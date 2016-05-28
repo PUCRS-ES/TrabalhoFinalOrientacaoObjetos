@@ -1,29 +1,33 @@
 package trabalhoorientacaoobjetos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author 15202606
  */
 public class Produto {
-    public static final double precoNaoIndentificado = -1;
-    public static final double precoIndefinido = -2;
+    public static final double PRECO_NAO_IDENTIFICADO = -1;
+    public static final double PRECO_INDEFINIDO = -2;
     private String produtoID;
     private String titulo;
     private double preco;
-    //private Revisoes[] revisoes;
+    private List<Revisao> revisoes;
 
     public Produto(String produtoID, String titulo, double preco) {
+        this.revisoes = new ArrayList<>();
         this.produtoID = produtoID;
         this.titulo = titulo;
         this.preco = preco;
     }
 
     public double getPrecoNaoIndentificado() {
-        return precoNaoIndentificado;
+        return PRECO_NAO_IDENTIFICADO;
     }
 
     public double getPrecoIndefinido() {
-        return precoIndefinido;
+        return PRECO_INDEFINIDO;
     }
 
     public String getProdutoID() {
@@ -50,5 +54,7 @@ public class Produto {
         this.preco = preco;
     }
     
-    
+    public void addRevisao(Revisao review) {
+        this.revisoes.add(review);
+    }
 }

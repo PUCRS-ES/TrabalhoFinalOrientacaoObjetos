@@ -1,5 +1,8 @@
 package trabalhoorientacaoobjetos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author 15202606
@@ -7,9 +10,10 @@ package trabalhoorientacaoobjetos;
 public class Usuario {
     private String userId;
     private String nomeUsuario;
-    //private Revisoes[] revisoes;
+    private List<Revisao> revisoes;
 
     public Usuario(String userId, String nomeUsuario) {
+        this.revisoes = new ArrayList<>();
         this.userId = userId;
         this.nomeUsuario = nomeUsuario;
     }
@@ -30,4 +34,7 @@ public class Usuario {
         this.nomeUsuario = nomeUsuario;
     }
     
+    public void addRevisao(Revisao review) {
+        this.revisoes.add(review);
+    }
 }
