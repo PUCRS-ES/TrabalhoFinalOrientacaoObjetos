@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalhoorientacaoobjetos;
 
 /**
@@ -11,12 +6,14 @@ package trabalhoorientacaoobjetos;
  */
 public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
 
+    DataManager dataManager;
+    
     /**
      * Creates new form TrabalhoOrientacaoObjetos
      */
     public TrabalhoOrientacaoObjetos() {
         initComponents();
-        new DataManager();
+        dataManager = new DataManager();
     }
 
     /**
@@ -207,7 +204,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        dataManager.calculaQuestao7();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

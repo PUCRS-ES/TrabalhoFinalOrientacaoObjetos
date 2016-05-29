@@ -3,6 +3,7 @@ package trabalhoorientacaoobjetos;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,7 +15,7 @@ public class DataManager {
     private List<Revisao> reviews = new ArrayList<Revisao>();
     private HashMap<String, Produto> products = new HashMap<String, Produto>();
     private HashMap<String, Usuario> users = new HashMap<String, Usuario>();
-    
+    private HashMap<Integer, Integer> histogramaQuestao7 = new HashMap<Integer, Integer>();
     
     public DataManager() {
         try {
@@ -70,5 +71,29 @@ public class DataManager {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-       
+    
+    public List<Integer> calculaQuestao7() {
+        //usuario de teste. Sabemos que ele tem 14 reviews
+        //Usuario testUser = users.get("AJGU56YG8G1DQ");
+        //testUser = null;
+        
+        for(Usuario usuarioAtual: users.values()) {
+            int quantidadeRevisoesDoUsuario = usuarioAtual.getQuantidadeRevisoes();
+            
+            //verifica se ja temos algum contador para essa quantidade de reviews
+            //Se ja existir, apenas incrementamos ele.
+            Integer quantAux = histogramaQuestao7.get(quantidadeRevisoesDoUsuario);
+            if(quantAux == null)
+                histogramaQuestao7.put(quantidadeRevisoesDoUsuario, 1);
+            else
+                histogramaQuestao7.put(quantidadeRevisoesDoUsuario, quantAux + 1);
+        }
+        
+        List minhaList = new ArrayList(histogramaQuestao7.keySet());
+        Collections.sort(minhaList);
+        //A partir daqui ja temos os dados prontos para montar o histograma
+        //So entender a biblioteca e passar os dados para ela.
+        
+        return null;
+    } 
 }
