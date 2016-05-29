@@ -37,4 +37,8 @@ public class Usuario {
     public void addRevisao(Revisao review) {
         this.revisoes.add(review);
     }
+    
+    public int getQuantidadeRevisoes() {
+        return this.revisoes.size();
+    }
 }

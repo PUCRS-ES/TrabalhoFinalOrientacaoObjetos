@@ -11,9 +11,10 @@ import javax.swing.JOptionPane;
 
 public class DataManager {
 
-    List<Revisao> reviews = new ArrayList<Revisao>();
-    HashMap<String, Produto> products = new HashMap<String, Produto>();
-    HashMap<String, Usuario> users = new HashMap<String, Usuario>();
+    private List<Revisao> reviews = new ArrayList<Revisao>();
+    private HashMap<String, Produto> products = new HashMap<String, Produto>();
+    private HashMap<String, Usuario> users = new HashMap<String, Usuario>();
+    
     
     public DataManager() {
         try {
@@ -29,13 +30,23 @@ public class DataManager {
                     preco = Produto.PRECO_NAO_IDENTIFICADO;
                 else
                     preco = Double.parseDouble(precoAux);
-                Produto produtoAtual = new Produto(produtoId, titulo, preco);
-                products.put(produtoId, produtoAtual);
+                Produto produtoAtual;
+                if(!products.containsKey(produtoId)) {
+                    produtoAtual = new Produto(produtoId, titulo, preco);
+                    products.put(produtoId, produtoAtual);
+                }
+                else
+                    produtoAtual = products.get(produtoId);
 
                 String userId = reviewAtual[3].substring(reviewAtual[3].indexOf(':') + 2);
                 String profileName = reviewAtual[4].substring(reviewAtual[4].indexOf(':') + 2);
-                Usuario usuarioAtual = new Usuario(userId, profileName);
-                users.put(userId, usuarioAtual);
+                Usuario usuarioAtual;
+                if(!users.containsKey(userId)) {
+                    usuarioAtual = new Usuario(userId, profileName);
+                    users.put(userId, usuarioAtual);
+                }
+                else
+                    usuarioAtual = users.get(userId);
 
                 double pontuacao = Double.parseDouble(reviewAtual[6].substring(reviewAtual[6].indexOf(':') + 2));
                 long time = Long.parseLong(reviewAtual[7].substring(reviewAtual[7].indexOf(':') + 2));
@@ -43,6 +54,9 @@ public class DataManager {
                 String texto = reviewAtual[9].substring(reviewAtual[9].indexOf(':') + 2);
                 Revisao review = new Revisao(pontuacao, time, sumario, texto, produtoId, userId);
                 reviews.add(review);
+                
+                produtoAtual.addRevisao(review);
+                usuarioAtual.addRevisao(review);
             }
             JOptionPane.showMessageDialog(null, 
                 "Reviews: " + reviews.size() + "\n" +
@@ -56,5 +70,5 @@ public class DataManager {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        
+       
 }
