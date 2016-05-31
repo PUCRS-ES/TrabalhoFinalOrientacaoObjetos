@@ -1,7 +1,10 @@
 package trabalhoorientacaoobjetos;
 
+import static java.nio.file.Files.list;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.List;
+
 
 /**
  *
@@ -20,6 +23,10 @@ public class Produto {
         this.produtoID = produtoID;
         this.titulo = titulo;
         this.preco = preco;
+    }
+
+    Produto(Produto consultaProdutosPorId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public double getPrecoNaoIndentificado() {
@@ -57,4 +64,9 @@ public class Produto {
     public void addRevisao(Revisao review) {
         this.revisoes.add(review);
     }
+    
+    public List<Revisao> getRevisoes(){
+        return revisoes;
+    }
+  
 }

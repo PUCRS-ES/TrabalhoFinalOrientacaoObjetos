@@ -21,4 +21,9 @@ public class Revisao {
         this.produtoId = produtoId;
         this.userId = userId;
     }
+
+    public double getPontuacao() {
+        return pontuacao;
+    }
+    
 }

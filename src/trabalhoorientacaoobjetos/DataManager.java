@@ -2,6 +2,7 @@ package trabalhoorientacaoobjetos;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -96,4 +97,16 @@ public class DataManager {
         
         return null;
     } 
+    
+    public Produto consultaProdutoPorId(String id){
+        
+        if(products.containsKey(id)){
+            return products.get(id);
+        }
+        else {
+            System.out.print("ID inesistente");
+            return null;
+        }        
+        
+    }   
 }
