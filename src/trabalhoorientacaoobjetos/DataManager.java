@@ -1,14 +1,30 @@
 package trabalhoorientacaoobjetos;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.statistics.HistogramDataset;
+import org.jfree.data.statistics.HistogramType;
+import org.jfree.data.xy.AbstractIntervalXYDataset;
+import org.jfree.data.xy.IntervalXYDataset;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
+
 
 public class DataManager {
 
@@ -72,7 +88,7 @@ public class DataManager {
         }
     }
     
-    public List<Integer> calculaQuestao7() {
+    public List<Integer> calculaQuestao7() throws IOException {
         //usuario de teste. Sabemos que ele tem 14 reviews
         //Usuario testUser = users.get("AJGU56YG8G1DQ");
         //testUser = null;
@@ -93,6 +109,33 @@ public class DataManager {
         Collections.sort(minhaList);
         //A partir daqui ja temos os dados prontos para montar o histograma
         //So entender a biblioteca e passar os dados para ela.
+        
+        
+        double[] value = new double[100];
+        Random generator = new Random();
+        for (int i=1; i < 100; i++) {
+            value[i] = generator.nextDouble();
+            int number = 10;
+            HistogramDataset dataset = new HistogramDataset();
+            dataset.setType(HistogramType.RELATIVE_FREQUENCY);
+            dataset.addSeries("Histogram",value,number);
+            String plotTitle = "Histogram";
+            String xaxis = "number";
+            String yaxis = "value";
+            PlotOrientation orientation = PlotOrientation.VERTICAL;
+            boolean show = false;
+            boolean toolTips = false;
+            boolean urls = false;
+            JFreeChart chart = ChartFactory.createHistogram( plotTitle, xaxis, yaxis,
+            dataset, orientation, show, toolTips, urls);
+            int width = 500;
+            int height = 300;
+            try {
+                ChartUtilities.saveChartAsPNG(new File("histogram.PNG"), chart, width, height);
+            } 
+            catch (IOException e) {
+            }
+        }
         
         return null;
     } 
