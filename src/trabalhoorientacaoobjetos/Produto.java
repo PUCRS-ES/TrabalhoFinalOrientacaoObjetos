@@ -15,7 +15,7 @@ public class Produto {
     public static final double PRECO_INDEFINIDO = -2;
     private String produtoID;
     private String titulo;
-    private double preco;
+    private Double preco;
     private List<Revisao> revisoes;
 
     public Produto(String produtoID, String titulo, double preco) {
@@ -45,7 +45,7 @@ public class Produto {
         return titulo;
     }
 
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
@@ -68,5 +68,8 @@ public class Produto {
     public List<Revisao> getRevisoes(){
         return revisoes;
     }
-  
+    
+    public int getQuantidadeRevisoes() {
+        return revisoes.size();
+    }
 }

@@ -85,6 +85,7 @@ public class DataManager {
 //                "Products: " + products.size());
 //            calculaQuestao7();
 //            calculaQuestao6();
+//            calculaQuestao4();
         }
         catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,6 +93,17 @@ public class DataManager {
         catch (IOException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void calculaQuestao4() {
+        List<Produto> produtosMaisBemAvaliados = new ArrayList<Produto>();
+        for (Produto produto : products.values()) {
+            if(produto.getQuantidadeRevisoes() > 10)
+                produtosMaisBemAvaliados.add(produto);
+        }
+        
+        //produtosMaisBemAvaliados.sort((Produto p1, Produto p2) -> p1.getProdutoID().compareTo(p2.getProdutoID()));
+        //produtosMaisBemAvaliados.sort((Produto p1, Produto p2) -> p1.getPreco().compareTo(p2.getPreco()));
     }
     
     public void calculaQuestao6() {
