@@ -131,11 +131,7 @@ public class DataManager {
             dataset, orientation, show, toolTips, urls);
             int width = 500;
             int height = 300;
-            try {
-                ChartUtilities.saveChartAsPNG(new File("histogram.PNG"), chart, width, height);
-            } 
-            catch (IOException e) {
-            }
+            ChartUtilities.saveChartAsPNG(new File("histogram.PNG"), chart, width, height);
         }
         
         return null;
