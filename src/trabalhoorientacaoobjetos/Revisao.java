@@ -26,4 +26,7 @@ public class Revisao {
         return pontuacao;
     }
     
+    public long getTime() {
+        return time;
+    }
 }

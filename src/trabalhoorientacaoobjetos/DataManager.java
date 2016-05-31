@@ -3,13 +3,26 @@ package trabalhoorientacaoobjetos;
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import static java.time.temporal.ChronoUnit.MONTHS;
+import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -18,13 +31,11 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-
 public class DataManager {
 
     private List<Revisao> reviews = new ArrayList<Revisao>();
     private HashMap<String, Produto> products = new HashMap<String, Produto>();
     private HashMap<String, Usuario> users = new HashMap<String, Usuario>();
-    private HashMap<Integer, Integer> histogramaQuestao7 = new HashMap<Integer, Integer>();
     
     public DataManager() {
         try {
@@ -73,6 +84,7 @@ public class DataManager {
 //                "Users: " + users.size() + "\n" +
 //                "Products: " + products.size());
 //            calculaQuestao7();
+//            calculaQuestao6();
         }
         catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -82,10 +94,62 @@ public class DataManager {
         }
     }
     
+    public void calculaQuestao6() {
+        HashMap<Long, Integer> histogramaQuestao6 = new HashMap<Long, Integer>();
+        
+        for (Revisao rev : reviews) {
+            long valor = rev.getTime();
+            LocalDateTime timestamp = LocalDateTime.ofInstant(Instant.ofEpochSecond(valor), ZoneOffset.UTC);
+            
+            //String key = timestamp.getYear() + "/" + String.format("%02d", timestamp.getMonthValue());
+            LocalDate primeiroDiaDoMes = LocalDate.of(timestamp.getYear(), timestamp.getMonthValue(), 1);
+            Long key = primeiroDiaDoMes.atStartOfDay().atZone(ZoneOffset.UTC).toEpochSecond();
+            
+            Integer quantAux = histogramaQuestao6.get(key);
+            if (quantAux == null)
+                histogramaQuestao6.put(key, 1);
+            else
+                histogramaQuestao6.put(key, quantAux + 1);
+        }
+        List<Long> minhaList = new ArrayList(histogramaQuestao6.keySet());
+        Collections.sort(minhaList);
+        
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries series1 = new XYSeries("Distribuição do número de avaliaçoes por mês");
+
+        for (int i = 0; i < minhaList.size(); i++)
+            series1.add(i, histogramaQuestao6.get(minhaList.get(i)));
+        dataset.addSeries(series1);
+        final JFreeChart chart = ChartFactory.createXYBarChart(
+            "",
+            "Meses",
+            false,
+            "Quantidade de reviews",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
+
+        final ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setDomainZoomable(true);
+        
+        JPanel jPanel = new JPanel();
+        jPanel.setLayout(new BorderLayout());
+        jPanel.add(chartPanel);
+
+        JFrame frame = new JFrame();
+        frame.add(jPanel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    
     public void calculaQuestao7() {
         //usuario de teste. Sabemos que ele tem 14 reviews
         //Usuario testUser = users.get("AJGU56YG8G1DQ");
         //testUser = null;
+        HashMap<Integer, Integer> histogramaQuestao7 = new HashMap<Integer, Integer>();
         
         for(Usuario usuarioAtual: users.values()) {
             int quantidadeRevisoesDoUsuario = usuarioAtual.getQuantidadeRevisoes();
@@ -124,7 +188,7 @@ public class DataManager {
             true,
             false
         );
-
+        
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setDomainZoomable(true);
         
