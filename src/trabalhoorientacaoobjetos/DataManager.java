@@ -1,30 +1,22 @@
 package trabalhoorientacaoobjetos;
 
-import java.io.File;
+import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.statistics.HistogramDataset;
-import org.jfree.data.statistics.HistogramType;
-import org.jfree.data.xy.AbstractIntervalXYDataset;
-import org.jfree.data.xy.IntervalXYDataset;
-import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-
 
 
 public class DataManager {
@@ -76,10 +68,11 @@ public class DataManager {
                 produtoAtual.addRevisao(review);
                 usuarioAtual.addRevisao(review);
             }
-            JOptionPane.showMessageDialog(null, 
-                "Reviews: " + reviews.size() + "\n" +
-                "Users: " + users.size() + "\n" +
-                "Products: " + products.size());
+//            JOptionPane.showMessageDialog(null, 
+//                "Reviews: " + reviews.size() + "\n" +
+//                "Users: " + users.size() + "\n" +
+//                "Products: " + products.size());
+//            calculaQuestao7();
         }
         catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,7 +82,7 @@ public class DataManager {
         }
     }
     
-    public List<Integer> calculaQuestao7() throws IOException {
+    public void calculaQuestao7() {
         //usuario de teste. Sabemos que ele tem 14 reviews
         //Usuario testUser = users.get("AJGU56YG8G1DQ");
         //testUser = null;
@@ -106,35 +99,43 @@ public class DataManager {
                 histogramaQuestao7.put(quantidadeRevisoesDoUsuario, quantAux + 1);
         }
         
-        List minhaList = new ArrayList(histogramaQuestao7.keySet());
+        List<Integer> minhaList = new ArrayList(histogramaQuestao7.keySet());
         Collections.sort(minhaList);
-        //A partir daqui ja temos os dados prontos para montar o histograma
-        //So entender a biblioteca e passar os dados para ela.
         
+        //temporariamente estou alterando o histograma para ele ficar melhor
+        //minhaList.remove(minhaList.size() - 1);
+        //histogramaQuestao7.put(1, 500);
+        //histogramaQuestao7.put(2, 300);
         
-        double[] value = new double[100];
-        Random generator = new Random();
-        for (int i=1; i < 100; i++) {
-            value[i] = generator.nextDouble();
-            int number = 10;
-            HistogramDataset dataset = new HistogramDataset();
-            dataset.setType(HistogramType.RELATIVE_FREQUENCY);
-            dataset.addSeries("Histogram",value,number);
-            String plotTitle = "Histogram";
-            String xaxis = "number";
-            String yaxis = "value";
-            PlotOrientation orientation = PlotOrientation.VERTICAL;
-            boolean show = false;
-            boolean toolTips = false;
-            boolean urls = false;
-            JFreeChart chart = ChartFactory.createHistogram( plotTitle, xaxis, yaxis,
-            dataset, orientation, show, toolTips, urls);
-            int width = 500;
-            int height = 300;
-            ChartUtilities.saveChartAsPNG(new File("histogram.PNG"), chart, width, height);
-        }
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        XYSeries series1 = new XYSeries("Distribuição do número de usuários pela quantidade de avaliações produzidas");
+
+        for (int i = 0; i < minhaList.size(); i++)
+            series1.add(minhaList.get(i), histogramaQuestao7.get(minhaList.get(i)));
+        dataset.addSeries(series1);
+        final JFreeChart chart = ChartFactory.createXYBarChart(
+            "",
+            "Quantidade de reviews",
+            false,
+            "Quantidade de usuários",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
+
+        final ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setDomainZoomable(true);
         
-        return null;
+        JPanel jPanel = new JPanel();
+        jPanel.setLayout(new BorderLayout());
+        jPanel.add(chartPanel);
+
+        JFrame frame = new JFrame();
+        frame.add(jPanel);
+        frame.pack();
+        frame.setVisible(true);
     } 
     
     public Produto consultaProdutoPorId(String id){

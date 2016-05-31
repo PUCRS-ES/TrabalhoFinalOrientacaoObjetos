@@ -271,30 +271,10 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dataManager.calculaQuestao7();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
     private void buscaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaIdActionPerformed
         DataManager data = new DataManager();
         Produto produto = data.consultaProdutoPorId(jTextField3.getText());
-        
+
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
         String id = produto.getProdutoID();
         String nome = produto.getTitulo();
@@ -302,17 +282,36 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         List<Revisao> revisoes = produto.getRevisoes();
         for(Revisao review: revisoes){
             String avaliacao = review.getPontuacao()+"; ";
-          //  String avaliacoes = avaliacoes + avaliacao;
+            //  String avaliacoes = avaliacoes + avaliacao;
         }
-        
-        
-       // val.addRow(new String[](id,nome,preco,avaliacao));
-// TODO add your handling code here:
+
+        // val.addRow(new String[](id,nome,preco,avaliacao));
+        // TODO add your handling code here:
     }//GEN-LAST:event_buscaIdActionPerformed
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1AncestorAdded
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dataManager.calculaQuestao7();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
