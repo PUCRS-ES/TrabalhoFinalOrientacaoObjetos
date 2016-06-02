@@ -225,5 +225,23 @@ public class DataManager {
             return null;
         }        
         
-    }   
+    }
+    
+    public Usuario consultaUsuarioPorId(String id)
+    {
+        for(String x: users.keySet()){
+            Usuario usu = users.get(x);
+            if(usu != null)return usu;
+        }
+        return null;
+    }
+    
+    public Usuario consultaUsuarioPorNome(String nome){
+        for(String x: users.keySet()){
+            Usuario usu = users.get(x);
+            if(usu.getNomeUsuario().indexOf(nome) != -1)return usu;
+        }
+        return null;
+    }
+    
 }
