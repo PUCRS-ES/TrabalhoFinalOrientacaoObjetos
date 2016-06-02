@@ -233,6 +233,7 @@ public class DataManager {
             Usuario usu = users.get(x);
             if(usu != null)return usu;
         }
+        System.out.println("Id de usuário inexistente");
         return null;
     }
     
@@ -241,6 +242,7 @@ public class DataManager {
             Usuario usu = users.get(x);
             if(usu.getNomeUsuario().indexOf(nome) != -1)return usu;
         }
+        System.out.println("Nome de usuário inexistente");
         return null;
     }
     
