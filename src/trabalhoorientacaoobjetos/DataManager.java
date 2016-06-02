@@ -36,6 +36,7 @@ public class DataManager {
     private List<Revisao> reviews = new ArrayList<Revisao>();
     private HashMap<String, Produto> products = new HashMap<String, Produto>();
     private HashMap<String, Usuario> users = new HashMap<String, Usuario>();
+    private List<Produto> produtos = new ArrayList<Produto>();
     
     public DataManager() {
         try {
@@ -225,4 +226,16 @@ public class DataManager {
         }        
         
     }   
+    
+    public List<Produto> consultaProdutoPorNome(String nome){
+        
+        for (String codigoProduto : products.keySet()){
+            Produto produtoAtual = products.get(codigoProduto);
+            String linha = produtoAtual.getTitulo();
+            if(linha.toLowerCase().contains(nome.toLowerCase())){
+                produtos.add(produtoAtual);
+            }
+        }
+        return produtos;
+    }
 }

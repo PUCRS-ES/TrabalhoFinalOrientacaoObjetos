@@ -278,12 +278,28 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
         String id = produto.getProdutoID();
         String nome = produto.getTitulo();
-        String preco = produto.getPreco()+"";
+        double precoN = produto.getPreco();
+        String preco = "";
+        if(precoN == Produto.PRECO_NAO_IDENTIFICADO){
+            preco = "unknown price";
+        }
+        else if(precoN == Produto.PRECO_INDEFINIDO){
+            preco = "undefined price";
+        }else{
+            preco = precoN+"";
+        }
+        
+        
+        
         List<Revisao> revisoes = produto.getRevisoes();
+        String avaliacoes = "";
         for(Revisao review: revisoes){
-            String avaliacao = review.getPontuacao()+"; ";
+            String avaliacao = review.getPontuacao()+"";
+            avaliacoes = avaliacoes+avaliacao+"; ";
             //  String avaliacoes = avaliacoes + avaliacao;
         }
+
+        val.addRow(new String[]{id, nome, preco, avaliacoes});
 
         // val.addRow(new String[](id,nome,preco,avaliacao));
         // TODO add your handling code here:
@@ -294,7 +310,38 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        DataManager data = new DataManager();
+        List<Produto> produtos = data.consultaProdutoPorNome(jTextField4.getText());
+
+        DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
+        for(Produto produtoAtual: produtos){
+            String id = produtoAtual.getProdutoID();
+        
+            String nome = produtoAtual.getTitulo();
+            double precoN = produtoAtual.getPreco();
+            String preco = "";
+            if(precoN == Produto.PRECO_NAO_IDENTIFICADO){
+               preco = "unknown price";
+            }
+            else if(precoN == Produto.PRECO_INDEFINIDO){
+                preco = "undefined price";
+            }else{
+                preco = precoN+"";
+            }
+        
+        
+        
+            List<Revisao> revisoes = produtoAtual.getRevisoes();
+            String avaliacoes = "";
+            for(Revisao review: revisoes){
+                String avaliacao = review.getPontuacao()+"";
+                avaliacoes = avaliacoes+avaliacao+"; ";
+                //  String avaliacoes = avaliacoes + avaliacao;
+            }
+
+            val.addRow(new String[]{id, nome, preco, avaliacoes});
+            // TODO add your handling code here:
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorAdded
