@@ -1,9 +1,5 @@
 package trabalhoorientacaoobjetos;
 
-/**
- *
- * @author 15202606
- */
 public class Revisao {
     private double pontuacao;
     private long time;
@@ -11,15 +7,18 @@ public class Revisao {
     private String texto;
     private String produtoId;
     private String userId;
-    //private Utilidade util;
+    private int utilPositivo;
+    private int utilTotal;
     
-    public Revisao(double pontuacao, long time, String sumario, String texto, String produtoId, String userId) {
+    public Revisao(double pontuacao, long time, String sumario, String texto, String produtoId, String userId, int positivo, int total) {
         this.pontuacao = pontuacao;
         this.time = time;
         this.sumario = sumario;
         this.texto = texto;
         this.produtoId = produtoId;
         this.userId = userId;
+        this.utilPositivo = positivo;
+        this.utilTotal = total;
     }
 
     public double getPontuacao() {
@@ -28,5 +27,13 @@ public class Revisao {
     
     public long getTime() {
         return time;
+    }
+    
+    public int getUtilPositivo() {
+        return utilPositivo;
+    }
+    
+    public int getUtilTotal() {
+        return utilTotal;
     }
 }

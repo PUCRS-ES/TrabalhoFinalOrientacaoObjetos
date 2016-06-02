@@ -70,11 +70,14 @@ public class DataManager {
                 else
                     usuarioAtual = users.get(userId);
 
+                String[] utilidade = reviewAtual[5].substring(reviewAtual[5].indexOf(':') + 2).split("/");
+                int utilidadePositiva = Integer.parseInt(utilidade[0]);
+                int utilidadeTotal = Integer.parseInt(utilidade[1]);
                 double pontuacao = Double.parseDouble(reviewAtual[6].substring(reviewAtual[6].indexOf(':') + 2));
                 long time = Long.parseLong(reviewAtual[7].substring(reviewAtual[7].indexOf(':') + 2));
                 String sumario = reviewAtual[8].substring(reviewAtual[8].indexOf(':') + 2);
                 String texto = reviewAtual[9].substring(reviewAtual[9].indexOf(':') + 2);
-                Revisao review = new Revisao(pontuacao, time, sumario, texto, produtoId, userId);
+                Revisao review = new Revisao(pontuacao, time, sumario, texto, produtoId, userId, utilidadePositiva, utilidadeTotal);
                 reviews.add(review);
                 
                 produtoAtual.addRevisao(review);
@@ -86,7 +89,8 @@ public class DataManager {
 //                "Products: " + products.size());
 //            calculaQuestao7();
 //            calculaQuestao6();
-            calculaQuestao4();
+//            calculaQuestao4();
+//            calculaQuestao5();
         }
         catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,6 +98,19 @@ public class DataManager {
         catch (IOException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void calculaQuestao5() {
+        List<Usuario> usuariosComAvaliacoesMaisUteis = new ArrayList<Usuario>();
+        for (String codUsuario : users.keySet()) {
+            Usuario userAux = users.get(codUsuario);
+            usuariosComAvaliacoesMaisUteis.add(userAux);
+            userAux.calculaMediaDasAvaliacoesDoUsuario();
+        }
+        usuariosComAvaliacoesMaisUteis.sort(
+            Comparator.comparing((Usuario u1) -> u1.getMediaDasAvaliacoesDoUsuario()).reversed()
+        );
+        usuariosComAvaliacoesMaisUteis.subList(0, 20);
     }
     
     public void calculaQuestao4() {
@@ -104,7 +121,9 @@ public class DataManager {
                 produtosMaisBemAvaliados.add(produto);
             }
         }
-        produtosMaisBemAvaliados.sort((Produto p1, Produto p2) -> p1.getMediaDasAvaliacoes().compareTo(p2.getMediaDasAvaliacoes()));
+        produtosMaisBemAvaliados.sort(
+            Comparator.comparing((Produto p1) -> p1.getMediaDasAvaliacoes()).reversed()
+        );
         produtosMaisBemAvaliados.subList(0, 20);
     }
     

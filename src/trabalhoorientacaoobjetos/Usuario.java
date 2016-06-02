@@ -3,14 +3,11 @@ package trabalhoorientacaoobjetos;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author 15202606
- */
 public class Usuario {
     private String userId;
     private String nomeUsuario;
     private List<Revisao> revisoes;
+    private Double mediaDasAvaliacoes;
 
     public Usuario(String userId, String nomeUsuario) {
         this.revisoes = new ArrayList<>();
@@ -40,5 +37,22 @@ public class Usuario {
     
     public int getQuantidadeRevisoes() {
         return this.revisoes.size();
+    }
+    
+    public void calculaMediaDasAvaliacoesDoUsuario() {
+        double avaliacoesPositivas = 0;
+        double avaliacoesTotal = 0;
+        for (Revisao revisao : revisoes) {
+            avaliacoesPositivas += revisao.getUtilPositivo();
+            avaliacoesTotal += revisao.getUtilTotal();
+        }
+        if (avaliacoesTotal == 0)
+            mediaDasAvaliacoes = 0.0;
+        else
+            mediaDasAvaliacoes = avaliacoesPositivas / avaliacoesTotal;
+    }
+    
+    public Double getMediaDasAvaliacoesDoUsuario() {
+        return mediaDasAvaliacoes;
     }
 }

@@ -1,15 +1,9 @@
 package trabalhoorientacaoobjetos;
 
-import static java.nio.file.Files.list;
 import java.util.ArrayList;
-import static java.util.Collections.list;
 import java.util.List;
 
 
-/**
- *
- * @author 15202606
- */
 public class Produto {
     public static final double PRECO_NAO_IDENTIFICADO = -1;
     public static final double PRECO_INDEFINIDO = -2;
