@@ -17,6 +17,7 @@ public class Produto {
     private String titulo;
     private Double preco;
     private List<Revisao> revisoes;
+    private Double mediaDasAvaliacoes;
 
     public Produto(String produtoID, String titulo, double preco) {
         this.revisoes = new ArrayList<>();
@@ -71,5 +72,16 @@ public class Produto {
     
     public int getQuantidadeRevisoes() {
         return revisoes.size();
+    }
+    
+    public void calculaMediaDasAvaliacoes() {
+        double total = 0;
+        for(Revisao review : revisoes)
+            total += review.getPontuacao();
+        mediaDasAvaliacoes = total / revisoes.size();
+    }
+    
+    public Double getMediaDasAvaliacoes() {
+        return mediaDasAvaliacoes;
     }
 }

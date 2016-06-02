@@ -86,7 +86,7 @@ public class DataManager {
 //                "Products: " + products.size());
 //            calculaQuestao7();
 //            calculaQuestao6();
-//            calculaQuestao4();
+            calculaQuestao4();
         }
         catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,12 +99,13 @@ public class DataManager {
     public void calculaQuestao4() {
         List<Produto> produtosMaisBemAvaliados = new ArrayList<Produto>();
         for (Produto produto : products.values()) {
-            if(produto.getQuantidadeRevisoes() > 10)
+            if(produto.getQuantidadeRevisoes() > 10) {
+                produto.calculaMediaDasAvaliacoes();
                 produtosMaisBemAvaliados.add(produto);
+            }
         }
-        
-        //produtosMaisBemAvaliados.sort((Produto p1, Produto p2) -> p1.getProdutoID().compareTo(p2.getProdutoID()));
-        //produtosMaisBemAvaliados.sort((Produto p1, Produto p2) -> p1.getPreco().compareTo(p2.getPreco()));
+        produtosMaisBemAvaliados.sort((Produto p1, Produto p2) -> p1.getMediaDasAvaliacoes().compareTo(p2.getMediaDasAvaliacoes()));
+        produtosMaisBemAvaliados.subList(0, 20);
     }
     
     public void calculaQuestao6() {
@@ -238,4 +239,25 @@ public class DataManager {
         }
         return produtos;
     }
+    
+    
+    public Usuario consultaUsuarioPorId(String id)
+    {
+        for(String x: users.keySet()){
+            Usuario usu = users.get(x);
+            if(usu != null)return usu;
+        }
+        System.out.println("Id de usuário inexistente");
+        return null;
+    }
+    
+    public Usuario consultaUsuarioPorNome(String nome){
+        for(String x: users.keySet()){
+            Usuario usu = users.get(x);
+            if(usu.getNomeUsuario().indexOf(nome) != -1)return usu;
+        }
+        System.out.println("Nome de usuário inexistente");
+        return null;
+    }
+    
 }
