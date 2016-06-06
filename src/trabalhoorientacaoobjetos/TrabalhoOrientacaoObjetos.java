@@ -33,6 +33,9 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jTextField5 = new javax.swing.JTextField();
+        jButton4 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -67,21 +70,43 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTable3);
 
+        jButton4.setText("Buscar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Texto");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addGap(33, 33, 33))
         );
 
         jTabbedPane1.addTab("Avaliações", jPanel3);
@@ -101,7 +126,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
 
         jLabel1.setText("Id");
 
-        jTextField2.setText("jTextField1");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -138,9 +162,9 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                            .addComponent(jTextField1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
                             .addComponent(jButton2))
@@ -161,7 +185,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -179,12 +203,12 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             }
         ));
         jTable1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jTable1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -198,7 +222,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
 
         jLabel3.setText("Id");
 
-        jTextField4.setText("jTextField1");
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
@@ -226,9 +249,9 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                            .addComponent(jTextField4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buscaId)
@@ -276,6 +299,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         Produto produto = data.consultaProdutoPorId(jTextField3.getText());
 
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
+        val.addRow(new String[]{"ProdutoID", "Titulo", "Preco", "Avaliacoes"});
         String id = produto.getProdutoID();
         String nome = produto.getTitulo();
         double precoN = produto.getPreco();
@@ -314,10 +338,12 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         List<Produto> produtos = data.consultaProdutoPorNome(jTextField4.getText());
 
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
+        val.addRow(new String[]{"ProdutoID", "Titulo", "Preco", "Avaliacoes"});
+        
         for(Produto produtoAtual: produtos){
             String id = produtoAtual.getProdutoID();
         
-            String nome = produtoAtual.getTitulo();
+            String nome = produtoAtual.getTitulo();            
             double precoN = produtoAtual.getPreco();
             String preco = "";
             if(precoN == Produto.PRECO_NAO_IDENTIFICADO){
@@ -360,6 +386,29 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        DataManager data = new DataManager();
+        List<Revisao> reviews = data.calculaQuestao3(jTextField5.getText());
+        DefaultTableModel val = (DefaultTableModel) jTable3.getModel();
+        
+        val.addRow(new String[]{"Pontuacao", "Tempo", "Sumario", "Texto", "ProdutoID", "UsuarioID", "Positivos", "Total"});
+        
+        for(Revisao rev: reviews){
+            String pontuacao = rev.getPontuacao()+"";
+            //TRATAR TEMPO
+            String time = rev.getTime()+"";
+            String sumario = rev.getSumario();
+            String texto = rev.getTexto();
+            String produtoID = rev.getProdutoId()+"";
+            String usuarioID = rev.getUserId()+"";
+            String utilPositivo = rev.getUtilPositivo()+"";
+            String utilTotal = rev.getUtilTotal()+"";
+                        
+            val.addRow(new String[]{pontuacao, time, sumario, texto, produtoID, usuarioID, utilPositivo, utilTotal});
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -400,10 +449,12 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -418,5 +469,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }

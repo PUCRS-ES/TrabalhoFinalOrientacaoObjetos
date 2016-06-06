@@ -36,4 +36,22 @@ public class Revisao {
     public int getUtilTotal() {
         return utilTotal;
     }
+    
+    public String getTexto(){
+        return texto;
+    }
+
+    public String getSumario() {
+        return sumario;
+    }
+
+    public String getProdutoId() {
+        return produtoId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+    
+    
 }

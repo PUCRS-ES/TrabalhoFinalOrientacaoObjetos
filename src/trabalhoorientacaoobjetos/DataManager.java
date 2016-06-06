@@ -279,4 +279,15 @@ public class DataManager {
         return null;
     }
     
+    public List<Revisao> calculaQuestao3(String avaliacao){
+        
+        for (Revisao rev : reviews){            
+            String linha = rev.getTexto();
+            if(linha.toLowerCase().contains(avaliacao.toLowerCase())){
+                reviews.add(rev);
+            }
+        }
+        return reviews;
+    }
+    
 }
