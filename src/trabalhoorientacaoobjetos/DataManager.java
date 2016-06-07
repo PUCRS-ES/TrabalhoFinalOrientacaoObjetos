@@ -91,6 +91,7 @@ public class DataManager {
 //            calculaQuestao6();
 //            calculaQuestao4();
 //            calculaQuestao5();
+            consultaUsuarioPorId("A1QA985ULVCQOB");
         }
         catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -260,24 +261,28 @@ public class DataManager {
     }
     
     
-    public Usuario consultaUsuarioPorId(String id)
-    {
-        for(String x: users.keySet()){
-            Usuario usu = users.get(x);
-            if(usu != null)return usu;
-        }
-        System.out.println("Id de usuário inexistente");
-        return null;
+    public Usuario consultaUsuarioPorId(String id){ 
+        
+        return users.get(id);
     }
     
-    public Usuario consultaUsuarioPorNome(String nome){
+    public List<Usuario> consultaUsuarioPorNome(String nome){
+        List<Usuario> usuarios = new ArrayList<>();
+        boolean existe = false;
         for(String x: users.keySet()){
             Usuario usu = users.get(x);
-            if(usu.getNomeUsuario().indexOf(nome) != -1)return usu;
+            String linha = usu.getNomeUsuario();
+            if(linha.toLowerCase().contains(nome.toLowerCase())){
+                usuarios.add(usu);
+                existe = true;
+            }
         }
-        System.out.println("Nome de usuário inexistente");
-        return null;
-    }
+        if(!existe){
+            System.out.println("Nome de usuário inexistente");
+            return null;
+        }
+        return usuarios;
+       }
     
     public List<Revisao> calculaQuestao3(String avaliacao){
         List<Revisao> listaAtual = new ArrayList<>();
