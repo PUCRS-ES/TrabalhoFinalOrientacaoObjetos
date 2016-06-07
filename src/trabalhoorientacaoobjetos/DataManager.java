@@ -280,14 +280,14 @@ public class DataManager {
     }
     
     public List<Revisao> calculaQuestao3(String avaliacao){
-        
+        List<Revisao> listaAtual = new ArrayList<>();
         for (Revisao rev : reviews){            
             String linha = rev.getTexto();
-            if(linha.toLowerCase().contains(avaliacao.toLowerCase())){
-                reviews.add(rev);
+            if(linha.contains(avaliacao)){
+                listaAtual.add(rev);
             }
         }
-        return reviews;
+        return listaAtual;
     }
     
 }
