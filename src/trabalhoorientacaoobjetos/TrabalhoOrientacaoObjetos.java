@@ -1,5 +1,8 @@
 package trabalhoorientacaoobjetos;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -59,10 +62,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Score", "Data/Hora", "Resumo", "Texto"
@@ -105,18 +105,15 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
                     .addComponent(jButton4)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-                .addGap(33, 33, 33))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Avaliações", jPanel3);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Id", "Nome", "Avaliações"
@@ -193,22 +190,19 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nome", "Preço", "Avaliações"
             }
         ));
         jTable1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jTable1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -274,8 +268,8 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                .addGap(214, 214, 214))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Produtos", jPanel2);
@@ -299,7 +293,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         Produto produto = data.consultaProdutoPorId(jTextField3.getText());
 
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
-        val.addRow(new String[]{"ProdutoID", "Titulo", "Preco", "Avaliacoes"});
         String id = produto.getProdutoID();
         String nome = produto.getTitulo();
         double precoN = produto.getPreco();
@@ -338,7 +331,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         List<Produto> produtos = data.consultaProdutoPorNome(jTextField4.getText());
 
         DefaultTableModel val = (DefaultTableModel) jTable1.getModel();
-        val.addRow(new String[]{"ProdutoID", "Titulo", "Preco", "Avaliacoes"});
         
         for(Produto produtoAtual: produtos){
             String id = produtoAtual.getProdutoID();
@@ -392,20 +384,19 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         List<Revisao> reviews = data.calculaQuestao3(jTextField5.getText());
         DefaultTableModel val = (DefaultTableModel) jTable3.getModel();
         
-        val.addRow(new String[]{"Pontuacao", "Tempo", "Sumario", "Texto", "ProdutoID", "UsuarioID", "Positivos", "Total"});
+     
         
         for(Revisao rev: reviews){
             String pontuacao = rev.getPontuacao()+"";
-            //TRATAR TEMPO
-            String time = rev.getTime()+"";
+            long vTime = rev.getTime();
+            LocalDateTime timestamp = LocalDateTime.ofInstant(Instant.ofEpochSecond(vTime), ZoneOffset.UTC);
+            
+            String time = timestamp.getMonth()+ "/" +timestamp.getYear(); 
+            
             String sumario = rev.getSumario();
             String texto = rev.getTexto();
-            String produtoID = rev.getProdutoId()+"";
-            String usuarioID = rev.getUserId()+"";
-            String utilPositivo = rev.getUtilPositivo()+"";
-            String utilTotal = rev.getUtilTotal()+"";
                         
-            val.addRow(new String[]{pontuacao, time, sumario, texto, produtoID, usuarioID, utilPositivo, utilTotal});
+            val.addRow(new String[]{pontuacao, time, sumario, texto});
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
