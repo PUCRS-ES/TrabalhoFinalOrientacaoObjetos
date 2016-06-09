@@ -121,6 +121,12 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Id");
 
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -159,12 +165,12 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                            .addComponent(jTextField2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(jButton2)
+                            .addComponent(jButton1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -367,11 +373,30 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1AncestorAdded
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        DataManager data = new DataManager();
+        List<Usuario> usuarios = data.consultaUsuarioPorNome(jTextField1.getText());
+        DefaultTableModel val = (DefaultTableModel) jTable2.getModel();
+        //Incompleto
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dataManager.calculaQuestao7();
+        DataManager data = new DataManager();
+        Usuario usuario = data.consultaUsuarioPorId(jTextField1.getText());
+        DefaultTableModel val = (DefaultTableModel) jTable2.getModel();
+        
+            
+            String id = usuario.getUserId();
+            String nome = usuario.getNomeUsuario();
+            
+           List<Revisao> revisoes = usuario.getRevisoes();
+        String avaliacoes = "";
+        for(Revisao review: revisoes){
+            String avaliacao = review.getPontuacao()+"";
+            avaliacoes = avaliacoes+avaliacao+"; ";
+            //  String avaliacoes = avaliacoes + avaliacao;
+        }
+        val.addRow(new String[]{id, nome, avaliacoes});
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -399,6 +424,10 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             val.addRow(new String[]{pontuacao, time, sumario, texto});
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
