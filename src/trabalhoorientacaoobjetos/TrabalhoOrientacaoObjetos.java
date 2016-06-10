@@ -458,7 +458,22 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        DataManager data = new DataManager();
+        List<Usuario> usuariosComAvaliacoesMaisUteis = data.calculaQuestao5();
+        DefaultTableModel val = (DefaultTableModel) jTable2.getModel();
+        val.setRowCount(0);
+        for (Usuario usuarioAtual : usuariosComAvaliacoesMaisUteis) {
+            String id = usuarioAtual.getUserId();
+            String nome = usuarioAtual.getNomeUsuario();
+            List<Revisao> revisoes = usuarioAtual.getRevisoes();
+            String avaliacoes = "";
+            for (Revisao review : revisoes) {
+                String avaliacao = review.getPontuacao() + "";
+                avaliacoes = avaliacoes + avaliacao + "; ";
+                //  String avaliacoes = avaliacoes + avaliacao;
+            }
+            val.addRow(new String[]{id, nome, avaliacoes});
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

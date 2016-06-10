@@ -36,7 +36,6 @@ public class DataManager {
     private List<Revisao> reviews = new ArrayList<Revisao>();
     private HashMap<String, Produto> products = new HashMap<String, Produto>();
     private HashMap<String, Usuario> users = new HashMap<String, Usuario>();
-    private List<Produto> produtos = new ArrayList<Produto>();
     
     public DataManager() {
         try {
@@ -101,7 +100,7 @@ public class DataManager {
         }
     }
     
-    public void calculaQuestao5() {
+    public List<Usuario> calculaQuestao5() {
         List<Usuario> usuariosComAvaliacoesMaisUteis = new ArrayList<Usuario>();
         for (String codUsuario : users.keySet()) {
             Usuario userAux = users.get(codUsuario);
@@ -112,6 +111,7 @@ public class DataManager {
             Comparator.comparing((Usuario u1) -> u1.getMediaDasAvaliacoesDoUsuario()).reversed()
         );
         usuariosComAvaliacoesMaisUteis.subList(0, 20);
+        return usuariosComAvaliacoesMaisUteis;
     }
     
     public List<Produto> calculaQuestao4() {
@@ -250,6 +250,7 @@ public class DataManager {
     }   
     
     public List<Produto> consultaProdutoPorNome(String nome){
+        List<Produto> produtos = new ArrayList<Produto>();
         
         for (String codigoProduto : products.keySet()){
             Produto produtoAtual = products.get(codigoProduto);
