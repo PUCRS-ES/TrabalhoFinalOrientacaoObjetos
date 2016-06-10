@@ -114,7 +114,7 @@ public class DataManager {
         usuariosComAvaliacoesMaisUteis.subList(0, 20);
     }
     
-    public void calculaQuestao4() {
+    public List<Produto> calculaQuestao4() {
         List<Produto> produtosMaisBemAvaliados = new ArrayList<Produto>();
         for (Produto produto : products.values()) {
             if(produto.getQuantidadeRevisoes() > 10) {
@@ -126,6 +126,7 @@ public class DataManager {
             Comparator.comparing((Produto p1) -> p1.getMediaDasAvaliacoes()).reversed()
         );
         produtosMaisBemAvaliados.subList(0, 20);
+        return produtosMaisBemAvaliados;
     }
     
     public void calculaQuestao6() {
