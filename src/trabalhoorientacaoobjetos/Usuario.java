@@ -55,4 +55,9 @@ public class Usuario {
     public Double getMediaDasAvaliacoesDoUsuario() {
         return mediaDasAvaliacoes;
     }
+    
+    public List<Revisao> getRevisoes() {
+        return revisoes;
+    }
+    
 }

@@ -385,10 +385,10 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         DefaultTableModel val = (DefaultTableModel) jTable2.getModel();
         
             
-            String id = usuario.getUserId();
-            String nome = usuario.getNomeUsuario();
+        String id = usuario.getUserId();
+        String nome = usuario.getNomeUsuario();
             
-           List<Revisao> revisoes = usuario.getRevisoes();
+        List<Revisao> revisoes = usuario.getRevisoes();
         String avaliacoes = "";
         for(Revisao review: revisoes){
             String avaliacao = review.getPontuacao()+"";
