@@ -86,7 +86,6 @@ public class DataManager {
 //                "Reviews: " + reviews.size() + "\n" +
 //                "Users: " + users.size() + "\n" +
 //                "Products: " + products.size());
-//            calculaQuestao6();
 //            calculaQuestao4();
 //            calculaQuestao5();
             consultaUsuarioPorId("A1QA985ULVCQOB");
@@ -128,7 +127,7 @@ public class DataManager {
         return produtosMaisBemAvaliados;
     }
     
-    public void calculaQuestao6() {
+    public JFrame calculaQuestao6(JFrame frame, JPanel panel) {
         HashMap<Long, Integer> histogramaQuestao6 = new HashMap<Long, Integer>();
         
         for (Revisao rev : reviews) {
@@ -169,14 +168,15 @@ public class DataManager {
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setDomainZoomable(true);
         
-        JPanel jPanel = new JPanel();
-        jPanel.setLayout(new BorderLayout());
-        jPanel.add(chartPanel);
+        panel.removeAll();
+        panel.setLayout(new BorderLayout());
+        panel.add(chartPanel);
 
-        JFrame frame = new JFrame();
-        frame.add(jPanel);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame.add(panel);
         frame.pack();
         frame.setVisible(true);
+        return frame;
     }
     
     public JFrame calculaQuestao7(JFrame frame, JPanel panel) {
