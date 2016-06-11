@@ -86,7 +86,6 @@ public class DataManager {
 //                "Reviews: " + reviews.size() + "\n" +
 //                "Users: " + users.size() + "\n" +
 //                "Products: " + products.size());
-//            calculaQuestao7();
 //            calculaQuestao6();
 //            calculaQuestao4();
 //            calculaQuestao5();
@@ -180,7 +179,7 @@ public class DataManager {
         frame.setVisible(true);
     }
     
-    public void calculaQuestao7() {
+    public JFrame calculaQuestao7(JFrame frame, JPanel panel) {
         //usuario de teste. Sabemos que ele tem 14 reviews
         //Usuario testUser = users.get("AJGU56YG8G1DQ");
         //testUser = null;
@@ -227,14 +226,15 @@ public class DataManager {
         final ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setDomainZoomable(true);
         
-        JPanel jPanel = new JPanel();
-        jPanel.setLayout(new BorderLayout());
-        jPanel.add(chartPanel);
+        panel.removeAll();
+        panel.setLayout(new BorderLayout());
+        panel.add(chartPanel);
 
-        JFrame frame = new JFrame();
-        frame.add(jPanel);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        frame.add(panel);
         frame.pack();
         frame.setVisible(true);
+        return frame;
     } 
     
     public Produto consultaProdutoPorId(String id){
