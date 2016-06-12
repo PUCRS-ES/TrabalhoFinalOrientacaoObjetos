@@ -3,7 +3,6 @@ package trabalhoorientacaoobjetos;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Produto {
     public static final double PRECO_NAO_IDENTIFICADO = -1;
     public static final double PRECO_INDEFINIDO = -2;
@@ -18,10 +17,6 @@ public class Produto {
         this.produtoID = produtoID;
         this.titulo = titulo;
         this.preco = preco;
-    }
-
-    Produto(Produto consultaProdutosPorId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public double getPrecoNaoIndentificado() {

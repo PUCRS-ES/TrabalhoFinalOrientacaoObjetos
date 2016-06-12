@@ -6,17 +6,12 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author 15280433
- */
 public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
 
     DataManager dataManager;
@@ -172,19 +167,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Id");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Nome");
 
@@ -273,15 +256,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
                 "Id", "Nome", "Preço", "Avaliações"
             }
         ));
-        jTable1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTable1AncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton3.setText("Buscar");
@@ -292,12 +266,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Id");
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
 
         jLabel4.setText("Nome");
 
@@ -395,25 +363,15 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             preco = precoN+"";
         }
         
-        
-        
         List<Revisao> revisoes = produto.getRevisoes();
         String avaliacoes = "";
         for(Revisao review: revisoes){
-            String avaliacao = review.getPontuacao()+"";
-            avaliacoes = avaliacoes+avaliacao+"; ";
-            //  String avaliacoes = avaliacoes + avaliacao;
+            String avaliacao = review.getPontuacao() + "";
+            avaliacoes = avaliacoes+avaliacao + "; ";
         }
 
         val.addRow(new String[]{id, nome, preco, avaliacoes});
-
-        // val.addRow(new String[](id,nome,preco,avaliacao));
-        // TODO add your handling code here:
     }//GEN-LAST:event_buscaIdActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         DataManager data = new DataManager();
@@ -434,34 +392,25 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             else if(precoN == Produto.PRECO_INDEFINIDO){
                 preco = "undefined price";
             }else{
-                preco = precoN+"";
+                preco = precoN + "";
             }
-        
-        
         
             List<Revisao> revisoes = produtoAtual.getRevisoes();
             String avaliacoes = "";
             for(Revisao review: revisoes){
-                String avaliacao = review.getPontuacao()+"";
-                avaliacoes = avaliacoes+avaliacao+"; ";
-                //  String avaliacoes = avaliacoes + avaliacao;
+                String avaliacao = review.getPontuacao() + "";
+                avaliacoes = avaliacoes+avaliacao + "; ";
             }
 
             val.addRow(new String[]{id, nome, preco, avaliacoes});
-            // TODO add your handling code here:
         }
     }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jTable1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1AncestorAdded
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DataManager data = new DataManager();
         List<Usuario> usuarios = data.consultaUsuarioPorNome(jTextField1.getText());
         DefaultTableModel val = (DefaultTableModel) jTable2.getModel();
         val.setRowCount(0);
-        //Incompleto
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -470,35 +419,26 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         DefaultTableModel val = (DefaultTableModel) jTable2.getModel();
         val.setRowCount(0);
         
-            
         String id = usuario.getUserId();
         String nome = usuario.getNomeUsuario();
             
         List<Revisao> revisoes = usuario.getRevisoes();
         String avaliacoes = "";
         for(Revisao review: revisoes){
-            String avaliacao = review.getPontuacao()+"";
-            avaliacoes = avaliacoes+avaliacao+"; ";
-            //  String avaliacoes = avaliacoes + avaliacao;
+            String avaliacao = review.getPontuacao() + "";
+            avaliacoes = avaliacoes+avaliacao + "; ";
         }
         val.addRow(new String[]{id, nome, avaliacoes});
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
         DataManager data = new DataManager();
         List<Revisao> reviews = data.calculaQuestao3(jTextField5.getText());
         DefaultTableModel val = (DefaultTableModel) jTable3.getModel();
-        val.setRowCount(0);
-     
+        val.setRowCount(0);     
         
         for(Revisao rev: reviews){
-            String pontuacao = rev.getPontuacao()+"";
+            String pontuacao = rev.getPontuacao() + "";
             long vTime = rev.getTime();
             LocalDateTime timestamp = LocalDateTime.ofInstant(Instant.ofEpochSecond(vTime), ZoneOffset.UTC);
             
@@ -510,10 +450,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             val.addRow(new String[]{pontuacao, time, sumario, texto});
         }
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         DataManager data = new DataManager();
@@ -528,7 +464,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             for (Revisao review : revisoes) {
                 String avaliacao = review.getPontuacao() + "";
                 avaliacoes = avaliacoes + avaliacao + "; ";
-                //  String avaliacoes = avaliacoes + avaliacao;
             }
             val.addRow(new String[]{id, nome, avaliacoes});
         }
@@ -559,7 +494,6 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             for (Revisao review : revisoes) {
                 String avaliacao = review.getPontuacao() + "";
                 avaliacoes = avaliacoes + avaliacao + "; ";
-                //  String avaliacoes = avaliacoes + avaliacao;
             }
 
             val.addRow(new String[]{id, nome, preco, avaliacoes});

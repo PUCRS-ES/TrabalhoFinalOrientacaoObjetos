@@ -52,6 +52,4 @@ public class Revisao {
     public String getUserId() {
         return userId;
     }
-    
-    
 }

@@ -3,25 +3,17 @@ package trabalhoorientacaoobjetos;
 import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import static java.time.temporal.ChronoUnit.MONTHS;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-//import javafx.util.converter.LocalDateTimeStringConverter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -83,13 +75,11 @@ public class DataManager {
                 produtoAtual.addRevisao(review);
                 usuarioAtual.addRevisao(review);
             }
-//            JOptionPane.showMessageDialog(null, 
-//                "Reviews: " + reviews.size() + "\n" +
-//                "Users: " + users.size() + "\n" +
-//                "Products: " + products.size());
-//            calculaQuestao4();
-//            calculaQuestao5();
-            consultaUsuarioPorId("A1QA985ULVCQOB");
+            //debug - Apenas se quisermos saber quantos reviews, usuarios e produtos sao
+            //JOptionPane.showMessageDialog(null, 
+            //    "Reviews: " + reviews.size() + "\n" +
+            //    "Users: " + users.size() + "\n" +
+            //    "Products: " + products.size());
         }
         catch (FileNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -183,7 +173,6 @@ public class DataManager {
     public void calculaQuestao7(JFrame frame, JPanel panel) {
         //usuario de teste. Sabemos que ele tem 14 reviews
         //Usuario testUser = users.get("AJGU56YG8G1DQ");
-        //testUser = null;
         HashMap<Integer, Integer> histogramaQuestao7 = new HashMap<Integer, Integer>();
         
         for(Usuario usuarioAtual: users.values()) {
@@ -201,7 +190,7 @@ public class DataManager {
         List<Integer> minhaList = new ArrayList(histogramaQuestao7.keySet());
         Collections.sort(minhaList);
         
-        //temporariamente estou alterando o histograma para ele ficar melhor
+        //Se quisermos de partida ver o histograma melhor, basta remover esses extremos
         //minhaList.remove(minhaList.size() - 1);
         //histogramaQuestao7.put(1, 500);
         //histogramaQuestao7.put(2, 300);
@@ -238,15 +227,10 @@ public class DataManager {
     } 
     
     public Produto consultaProdutoPorId(String id){
-        
-        if(products.containsKey(id)){
+        if(products.containsKey(id))
             return products.get(id);
-        }
-        else {
-            System.out.print("ID inesistente");
+        else
             return null;
-        }        
-        
     }   
     
     public List<Produto> consultaProdutoPorNome(String nome){
@@ -264,7 +248,6 @@ public class DataManager {
     
     
     public Usuario consultaUsuarioPorId(String id){ 
-        
         return users.get(id);
     }
     
@@ -279,12 +262,12 @@ public class DataManager {
                 existe = true;
             }
         }
-        if(!existe){
+        if(!existe) {
             System.out.println("Nome de usuário inexistente");
             return null;
         }
         return usuarios;
-       }
+    }
     
     public List<Revisao> calculaQuestao3(String avaliacao){
         List<Revisao> listaAtual = new ArrayList<>();
