@@ -99,7 +99,7 @@ public class DataManager {
         usuariosComAvaliacoesMaisUteis.sort(
             Comparator.comparing((Usuario u1) -> u1.getMediaDasAvaliacoesDoUsuario()).reversed()
         );
-        usuariosComAvaliacoesMaisUteis.subList(0, 20);
+        usuariosComAvaliacoesMaisUteis = usuariosComAvaliacoesMaisUteis.subList(0, 20);
         return usuariosComAvaliacoesMaisUteis;
     }
     
@@ -114,7 +114,7 @@ public class DataManager {
         produtosMaisBemAvaliados.sort(
             Comparator.comparing((Produto p1) -> p1.getMediaDasAvaliacoes()).reversed()
         );
-        produtosMaisBemAvaliados.subList(0, 20);
+        produtosMaisBemAvaliados = produtosMaisBemAvaliados.subList(0, 20);
         return produtosMaisBemAvaliados;
     }
     

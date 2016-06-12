@@ -505,7 +505,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             }
 
             List<Revisao> revisoes = produtoAtual.getRevisoes();
-            String avaliacoes = "";
+            String avaliacoes = "[Média: " + String.format("%.2f", produtoAtual.getMediaDasAvaliacoes()) + "] - ";
             for (Revisao review : revisoes) {
                 String avaliacao = review.getPontuacao() + "";
                 avaliacoes = avaliacoes + avaliacao + "; ";
