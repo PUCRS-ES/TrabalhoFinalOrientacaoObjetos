@@ -262,21 +262,26 @@ public class DataManager {
                 existe = true;
             }
         }
-        if(!existe) {
-            System.out.println("Nome de usuário inexistente");
+        if(!existe)
             return null;
-        }
+        
         return usuarios;
     }
     
-    public List<Revisao> calculaQuestao3(String avaliacao){
+    public List<Revisao> calculaQuestao3(String stringDeBusca){
         List<Revisao> listaAtual = new ArrayList<>();
         for (Revisao rev : reviews){            
             String linha = rev.getTexto();
-            if(linha.contains(avaliacao)){
+            if(linha.contains(stringDeBusca)) {
+                String idProduto = rev.getProdutoId();
+                String nomeProduto = products.get(idProduto).getTitulo();
+                rev.setNomeProduto(nomeProduto);
+                
                 listaAtual.add(rev);
             }
         }
+        listaAtual.sort((Revisao r1, Revisao r2) -> r1.getNomeProduto().compareTo(r2.getNomeProduto()));
+        
         return listaAtual;
     }
     

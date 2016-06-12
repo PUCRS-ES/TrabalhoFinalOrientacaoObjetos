@@ -9,6 +9,8 @@ public class Revisao {
     private String userId;
     private int utilPositivo;
     private int utilTotal;
+    //utilizado apenas na questao 3
+    private String nomeProduto;
     
     public Revisao(double pontuacao, long time, String sumario, String texto, String produtoId, String userId, int positivo, int total) {
         this.pontuacao = pontuacao;
@@ -21,6 +23,14 @@ public class Revisao {
         this.utilTotal = total;
     }
 
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+    
     public double getPontuacao() {
         return pontuacao;
     }
