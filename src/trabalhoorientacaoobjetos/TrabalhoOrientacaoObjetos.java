@@ -364,15 +364,20 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         }
         
         List<Revisao> revisoes = produto.getRevisoes();
-        String avaliacoes = "";
-        for(Revisao review: revisoes){
-            String avaliacao = review.getPontuacao() + "";
-            avaliacoes = avaliacoes+avaliacao + "; ";
-        }
-
+        String avaliacoes = getNotasDasAvaliacoes("", revisoes);
+        
         val.addRow(new String[]{id, nome, preco, avaliacoes});
     }//GEN-LAST:event_buscaIdActionPerformed
 
+    private String getNotasDasAvaliacoes(String startValue, List<Revisao> lista) {
+        StringBuilder avaliacoes = new StringBuilder(startValue);
+        for(Revisao review: lista){
+            String avaliacao = review.getPontuacao() + "";
+            avaliacoes.append(avaliacao).append("; ");
+        }
+        return avaliacoes.toString();
+    }
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         DataManager data = new DataManager();
         List<Produto> produtos = data.consultaProdutoPorNome(jTextField4.getText());
@@ -396,12 +401,8 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             }
         
             List<Revisao> revisoes = produtoAtual.getRevisoes();
-            String avaliacoes = "";
-            for(Revisao review: revisoes){
-                String avaliacao = review.getPontuacao() + "";
-                avaliacoes = avaliacoes+avaliacao + "; ";
-            }
-
+            String avaliacoes = getNotasDasAvaliacoes("", revisoes);
+            
             val.addRow(new String[]{id, nome, preco, avaliacoes});
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -416,11 +417,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         for(Usuario usu: usuarios){
             String id = usu.getUserId();
             String nome = usu.getNomeUsuario();
-            String avaliacoes = "";
-            for(Revisao review: usu.getRevisoes()){
-                String avaliacao = review.getPontuacao() + "";
-                avaliacoes = avaliacoes+avaliacao + "; ";
-            }
+            String avaliacoes = getNotasDasAvaliacoes("", usu.getRevisoes());
                         
             val.addRow(new String[]{id, nome, avaliacoes});
         }
@@ -436,11 +433,8 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         String nome = usuario.getNomeUsuario();
             
         List<Revisao> revisoes = usuario.getRevisoes();
-        String avaliacoes = "";
-        for(Revisao review: revisoes){
-            String avaliacao = review.getPontuacao() + "";
-            avaliacoes = avaliacoes+avaliacao + "; ";
-        }
+        String avaliacoes = getNotasDasAvaliacoes("", revisoes);
+        
         val.addRow(new String[]{id, nome, avaliacoes});
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -475,11 +469,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             String id = usuarioAtual.getUserId();
             String nome = usuarioAtual.getNomeUsuario();
             List<Revisao> revisoes = usuarioAtual.getRevisoes();
-            String avaliacoes = "";
-            for (Revisao review : revisoes) {
-                String avaliacao = review.getPontuacao() + "";
-                avaliacoes = avaliacoes + avaliacao + "; ";
-            }
+            String avaliacoes = getNotasDasAvaliacoes("", revisoes);
             val.addRow(new String[]{id, nome, avaliacoes});
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -505,11 +495,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             }
 
             List<Revisao> revisoes = produtoAtual.getRevisoes();
-            String avaliacoes = "[Média: " + String.format("%.2f", produtoAtual.getMediaDasAvaliacoes()) + "] - ";
-            for (Revisao review : revisoes) {
-                String avaliacao = review.getPontuacao() + "";
-                avaliacoes = avaliacoes + avaliacao + "; ";
-            }
+            String avaliacoes = getNotasDasAvaliacoes("[Média: " + String.format("%.2f", produtoAtual.getMediaDasAvaliacoes()) + "] - ", revisoes);
 
             val.addRow(new String[]{id, nome, preco, avaliacoes});
         }
