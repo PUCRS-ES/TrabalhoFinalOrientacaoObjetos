@@ -1,11 +1,15 @@
 package trabalhoorientacaoobjetos;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +24,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     JPanel panelQuestao7 = new JPanel();
     JFrame frameQuestao6 = new JFrame();
     JPanel panelQuestao6 = new JPanel();
+    DateFormat ddMmYyyyFormat = new SimpleDateFormat("dd/MM/yyyy");
     
     /**
      * Creates new form TrabalhoOrientacaoObjetos
@@ -47,6 +52,9 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -97,7 +105,13 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             }
         });
 
-        jFormattedTextField1.setText("jFormattedTextField1");
+        jFormattedTextField1.setText("01/01/1997");
+
+        jFormattedTextField2.setText("01/01/2017");
+
+        jLabel6.setText("Início");
+
+        jLabel7.setText("Fim");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -114,8 +128,15 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -129,8 +150,12 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jButton8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -542,6 +567,7 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        //Se a janela estiver visivel, nao precisamos recalcular
         if(!frameQuestao7.isVisible()) {
             dataManager.calculaQuestao7(frameQuestao7, panelQuestao7);
         }
@@ -549,9 +575,17 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        if(!frameQuestao6.isVisible()) {
-            dataManager.calculaQuestao6(frameQuestao6, panelQuestao6);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime inicio = LocalDateTime.parse(jFormattedTextField1.getText() + " 00:00", formatter);
+        LocalDateTime fim = LocalDateTime.parse(jFormattedTextField2.getText() + " 00:00", formatter);
+
+        if (inicio.isAfter(fim) || inicio.isEqual(fim)) {
+            JOptionPane.showMessageDialog(null, "Data de início precisa ser anterior a data final.");
+            return;
         }
+        
+        //sempre temos que mostrar/recalcular, pois as datas podem ter mudado
+        dataManager.calculaQuestao6(frameQuestao6, panelQuestao6, inicio, fim);     
         frameQuestao6.toFront();
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -601,11 +635,14 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.MONTHS;
 import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
@@ -127,22 +128,23 @@ public class DataManager {
         return produtosMaisBemAvaliados;
     }
     
-    public JFrame calculaQuestao6(JFrame frame, JPanel panel) {
+    public void calculaQuestao6(JFrame frame, JPanel panel, LocalDateTime inicio, LocalDateTime fim) {
         HashMap<Long, Integer> histogramaQuestao6 = new HashMap<Long, Integer>();
-        
+               
         for (Revisao rev : reviews) {
             long valor = rev.getTime();
             LocalDateTime timestamp = LocalDateTime.ofInstant(Instant.ofEpochSecond(valor), ZoneOffset.UTC);
-            
-            //String key = timestamp.getYear() + "/" + String.format("%02d", timestamp.getMonthValue());
-            LocalDate primeiroDiaDoMes = LocalDate.of(timestamp.getYear(), timestamp.getMonthValue(), 1);
-            Long key = primeiroDiaDoMes.atStartOfDay().atZone(ZoneOffset.UTC).toEpochSecond();
-            
-            Integer quantAux = histogramaQuestao6.get(key);
-            if (quantAux == null)
-                histogramaQuestao6.put(key, 1);
-            else
-                histogramaQuestao6.put(key, quantAux + 1);
+            if(inicio.isBefore(timestamp) && timestamp.isBefore(fim)) {
+                //String key = timestamp.getYear() + "/" + String.format("%02d", timestamp.getMonthValue());
+                LocalDate primeiroDiaDoMes = LocalDate.of(timestamp.getYear(), timestamp.getMonthValue(), 1);
+                Long key = primeiroDiaDoMes.atStartOfDay().atZone(ZoneOffset.UTC).toEpochSecond();
+
+                Integer quantAux = histogramaQuestao6.get(key);
+                if (quantAux == null)
+                    histogramaQuestao6.put(key, 1);
+                else
+                    histogramaQuestao6.put(key, quantAux + 1);
+            }
         }
         List<Long> minhaList = new ArrayList(histogramaQuestao6.keySet());
         Collections.sort(minhaList);
@@ -157,7 +159,7 @@ public class DataManager {
             "",
             "Meses",
             false,
-            "Quantidade de reviews",
+            "Quantidade de avaliações",
             dataset,
             PlotOrientation.VERTICAL,
             true,
@@ -176,10 +178,9 @@ public class DataManager {
         frame.add(panel);
         frame.pack();
         frame.setVisible(true);
-        return frame;
     }
     
-    public JFrame calculaQuestao7(JFrame frame, JPanel panel) {
+    public void calculaQuestao7(JFrame frame, JPanel panel) {
         //usuario de teste. Sabemos que ele tem 14 reviews
         //Usuario testUser = users.get("AJGU56YG8G1DQ");
         //testUser = null;
@@ -234,7 +235,6 @@ public class DataManager {
         frame.add(panel);
         frame.pack();
         frame.setVisible(true);
-        return frame;
     } 
     
     public Produto consultaProdutoPorId(String id){
