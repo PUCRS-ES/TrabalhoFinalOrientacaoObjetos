@@ -408,9 +408,22 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DataManager data = new DataManager();
-        List<Usuario> usuarios = data.consultaUsuarioPorNome(jTextField1.getText());
+        List<Usuario> usuarios = data.consultaUsuarioPorNome(jTextField2.getText());
+        
         DefaultTableModel val = (DefaultTableModel) jTable2.getModel();
         val.setRowCount(0);
+        
+        for(Usuario usu: usuarios){
+            String id = usu.getUserId();
+            String nome = usu.getNomeUsuario();
+            String avaliacoes = "";
+            for(Revisao review: usu.getRevisoes()){
+                String avaliacao = review.getPontuacao() + "";
+                avaliacoes = avaliacoes+avaliacao + "; ";
+            }
+                        
+            val.addRow(new String[]{id, nome, avaliacoes});
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
