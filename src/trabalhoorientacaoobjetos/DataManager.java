@@ -268,6 +268,14 @@ public class DataManager {
         return usuarios;
     }
     
+    public List<Revisao> getAvaliacoesDeUmProdutoPorId(String codProduto) {
+        return products.get(codProduto).getRevisoes();
+    }
+    
+    public List<Revisao> getAvaliacoesDeUmUsuarioPeloSeuCodigo(String codUsuario) {
+        return users.get(codUsuario).getRevisoes();
+    }
+    
     public List<Revisao> calculaQuestao3(String stringDeBusca){
         List<Revisao> listaAtual = new ArrayList<>();
         for (Revisao rev : reviews){            

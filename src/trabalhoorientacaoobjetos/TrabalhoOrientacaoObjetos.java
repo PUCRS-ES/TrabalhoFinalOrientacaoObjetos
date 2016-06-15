@@ -81,7 +81,16 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             new String [] {
                 "Nome do Produto", "Score", "Data/Hora", "Resumo", "Texto"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(jTable3);
 
         jButton4.setText("Buscar");
@@ -164,7 +173,21 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             new String [] {
                 "Id", "Nome", "Avaliações"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jLabel1.setText("Id");
@@ -255,7 +278,21 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
             new String [] {
                 "Id", "Nome", "Preço", "Avaliações"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton3.setText("Buscar");
@@ -523,6 +560,57 @@ public class TrabalhoOrientacaoObjetos extends javax.swing.JFrame {
         dataManager.calculaQuestao6(frameQuestao6, panelQuestao6, inicio, fim);     
         frameQuestao6.toFront();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if(evt.getClickCount() == 2) {
+            int linha = jTable1.getSelectedRow();
+            String codProduto = jTable1.getModel().getValueAt(linha, 0).toString();
+            
+            DefaultTableModel val = (DefaultTableModel) jTable3.getModel();
+            val.setRowCount(0);
+            
+            List<Revisao> reviews = dataManager.getAvaliacoesDeUmProdutoPorId(codProduto);
+            for(Revisao rev: reviews){
+                String pontuacao = rev.getPontuacao() + "";
+
+                long vTime = rev.getTime();
+                LocalDateTime timestamp = LocalDateTime.ofInstant(Instant.ofEpochSecond(vTime), ZoneOffset.UTC);
+                String time = timestamp.getMonth()+ "/" +timestamp.getYear(); 
+
+                String sumario = rev.getSumario();
+                String texto = rev.getTexto();
+
+                val.addRow(new String[]{codProduto, pontuacao, time, sumario, texto});
+            }
+            jTabbedPane1.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        if(evt.getClickCount() == 2) {
+            int linha = jTable2.getSelectedRow();
+            String idUsuario = jTable2.getModel().getValueAt(linha, 0).toString();
+            
+            DefaultTableModel val = (DefaultTableModel) jTable3.getModel();
+            val.setRowCount(0);
+            
+            List<Revisao> reviews = dataManager.getAvaliacoesDeUmUsuarioPeloSeuCodigo(idUsuario);
+            for(Revisao rev: reviews){
+                String codProduto = rev.getProdutoId();
+                String pontuacao = rev.getPontuacao() + "";
+
+                long vTime = rev.getTime();
+                LocalDateTime timestamp = LocalDateTime.ofInstant(Instant.ofEpochSecond(vTime), ZoneOffset.UTC);
+                String time = timestamp.getMonth()+ "/" +timestamp.getYear(); 
+
+                String sumario = rev.getSumario();
+                String texto = rev.getTexto();
+
+                val.addRow(new String[]{codProduto, pontuacao, time, sumario, texto});
+            }
+            jTabbedPane1.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
 
     /**
      * @param args the command line arguments
